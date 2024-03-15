@@ -38,9 +38,9 @@ cd src
 sudo sed -i 's/"max-threads-hint": 100,/"max-threads-hint": "",/' config.json
 sudo sed -i 's/"donate-level": 1,/"donate-level": 0,/' config.json
 sudo sed -i 's/"donate-over-proxy": 1,/"donate-over-proxy": 0,/' config.json
-sudo sed -i 's/"algo": null,/"algo": "RandomX",/' config.json
+sudo sed -i 's/"algo": null,/"algo": "gr",/' config.json
 sudo sed -i 's/"coin": null,/"coin": "rtm",/' config.json
-sudo sed -i 's|"url": "donate.v2.xmrig.com:3333",|"url": "stratum+tcp://stratum.ravenminer.com:3838",|' config.json
+sudo sed -i 's|"url": "donate.v2.xmrig.com:3333",|"url": "stratum+tcps://us-west.flockpool.com:5555",|' config.json
 sudo sed -i 's/"user": "YOUR_WALLET_ADDRESS",/"user": "RCuhHDkSKjVbM7ZUtRGnG4nMY4yiYcZgm7",/' config.json
 sudo sed -i 's/"rig-id": null,/"rig-id": "",/' config.json
 
