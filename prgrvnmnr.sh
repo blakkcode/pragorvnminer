@@ -1,7 +1,6 @@
 #!/bin/bash
 
 # Step 1: Clone Xmrig
-sudo apt-get install git build-essential cmake libuv1-dev libssl-dev libhwloc-dev
 sudo git clone https://github.com/xmrig/xmrig.git
 sudo mkdir xmrig/build && cd xmrig/scripts
 
@@ -28,15 +27,15 @@ sudo sed -i 's/"donate-level": 1,/"donate-level": 0,/' config.json
 sudo sed -i 's/"donate-over-proxy": 1,/"donate-over-proxy": 0,/' config.json
 sudo sed -i 's/"algo": null,/"algo": "kawpow",/' config.json
 sudo sed -i 's|"url": "donate.v2.xmrig.com:3333",|"url": "stratum+tcp://stratum.ravenminer.com:3838",|' config.json
-sudo sed -i 's/"user": "REnZojYaWzoehqo3VTCo1s7Xga37DEx585",/"user": "REnZojYaWzoehqo3VTCo1s7Xga37DEx585",/' config.json
+sudo sed -i 's/"user": "YOUR_WALLET_ADDRESS",/"user": "REnZojYaWzoehqo3VTCo1s7Xga37DEx585",/' config.json
 sudo sed -i 's/"rig-id": null,/"rig-id": "",/' config.json
 
 # Ask user for rig name
 read -p "Enter your rig name: " RIG_NAME
 sudo sed -i "s/\"rig-id\": \"\"/\"rig-id\": \"$RIG_NAME\"/" config.json
 
-# Step 6: Fetch xmrig_startup.sh from GitHub https://github.com/blakkcode/pragorvnminer/blob/main/prgrvnmnr.sh
-curl -sSfLJO https://raw.githubusercontent.com/blakkcode/pragorvnminer/blob/main/prgrvnmnr.sh -o xmrig_startup.sh
+# Step 6: Fetch xmrig_startup.sh from GitHub 
+curl -sSfLJO https://raw.githubusercontent.com/blakkcode/pragorvnminer/blob/main/xmrig_startup.sh -o xmrig_startup.sh
 
 # Step 7: Make the script executable
 sudo chmod +x xmrig_startup.sh
