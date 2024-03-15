@@ -1,6 +1,7 @@
 #!/bin/bash
 
 # Step 1: Clone Xmrig
+sudo apt-get install git build-essential cmake libuv1-dev libssl-dev libhwloc-dev
 sudo git clone https://github.com/xmrig/xmrig.git
 sudo mkdir xmrig/build && cd xmrig/scripts
 
@@ -34,8 +35,8 @@ sudo sed -i 's/"rig-id": null,/"rig-id": "",/' config.json
 read -p "Enter your rig name: " RIG_NAME
 sudo sed -i "s/\"rig-id\": \"\"/\"rig-id\": \"$RIG_NAME\"/" config.json
 
-# Step 6: Fetch xmrig_startup.sh from GitHub
-curl -sSfLJO https://raw.githubusercontent.com/your_username/your_repository/main/xmrig_startup.sh -o xmrig_startup.sh
+# Step 6: Fetch xmrig_startup.sh from GitHub https://github.com/blakkcode/pragorvnminer/blob/main/prgrvnmnr.sh
+curl -sSfLJO https://raw.githubusercontent.com/blakkcode/pragorvnminer/blob/main/prgrvnmnr.sh -o xmrig_startup.sh
 
 # Step 7: Make the script executable
 sudo chmod +x xmrig_startup.sh
