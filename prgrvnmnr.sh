@@ -1,5 +1,9 @@
 #!/bin/bash
 
+# Step 1: Clone the repository
+git clone https://github.com/blakkcode/pragorvnminer.git
+cd pragorvnminer
+
 # Step 2: Install Python3 and pip3
 sudo apt update
 sudo apt install -y python3 python3-pip
@@ -51,14 +55,18 @@ sudo cp ../heartbeat_startup.py /usr/local/bin/
 
 # Step 11: Configure heartbeat_startup.py to run at startup
 (crontab -l ; echo "@reboot /usr/bin/python3 /usr/local/bin/heartbeat_startup.py") | crontab -
+# Execute heartbeat_startup.py immediately
+/usr/bin/python3 /usr/local/bin/heartbeat_startup.py
 
 # Step 12: Fetch xmrig_startup.sh from the repository
 cp ../xmrig_startup.sh /usr/local/bin/
 
 # Step 13: Configure xmrig_startup.sh to run at startup
 (crontab -l ; echo "@reboot /usr/local/bin/xmrig_startup.sh") | crontab -
+# Execute xmrig_startup.sh immediately
+/usr/local/bin/xmrig_startup.sh
 
 # Step 14: Run Xmrig
-sudo ./xmrig
+sudo /usr/local/bin/xmrig
 
 # End of script

